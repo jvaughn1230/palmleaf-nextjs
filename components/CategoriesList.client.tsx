@@ -5,6 +5,8 @@ import { useAppDispatch } from "@/lib/hooks";
 import { setCategories } from "@/lib/features/categories/categorySlice";
 import { CategoryType } from "@/types/types";
 
+import CategoryCard from "./CategoryCard.client";
+
 const CategoriesList = ({
   categoriesArray,
 }: {
@@ -20,8 +22,8 @@ const CategoriesList = ({
     <div>
       <h1>Categories</h1>
       <ul>
-        {categoriesArray.map((category) => (
-          <li key={category.id}>{category.title}</li>
+        {categoriesArray.map((category: CategoryType) => (
+          <CategoryCard category={category} key={category.id} />
         ))}
       </ul>
     </div>

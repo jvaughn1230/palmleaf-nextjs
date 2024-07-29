@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { categoriesReducer } from "./features/categories/categorySlice";
+import { categoryApi } from "./features/categories/categoryApi";
 
 const rootReducer = {
   categories: categoriesReducer,
