@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import StoreProvider from "./StoreProvider";
+import Navbar from "@/components/Navbar.client";
 
 const poppins = Poppins({
   display: "swap",
@@ -23,7 +24,10 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en">
-        <body className={poppins.className}>{children}</body>
+        <body className={poppins.className}>
+          <Navbar />
+          {children}
+        </body>
       </html>
     </StoreProvider>
   );

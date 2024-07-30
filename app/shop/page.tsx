@@ -10,10 +10,13 @@ import {
   setError,
 } from "@/lib/features/categories/categorySlice";
 import { SelectCategories } from "@/lib/features/categories/category.selector";
+import CategoriesPreview from "@/components/CategoriesPreview.client";
 
 const ShopPage = () => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(SelectCategories);
+
+  console.log("shop page loaded");
 
   useEffect(() => {
     const getCategoriesMap = async () => {
@@ -30,18 +33,19 @@ const ShopPage = () => {
     };
 
     getCategoriesMap();
-  });
+  }, [dispatch]);
 
   return (
     <div>
       <h1>Shop Page</h1>
-      {categories.map((category) => (
-        <div key={category.id}>
-          <Link href={`/shop/${category.title.toLowerCase()}`}>
-            {category.title}
-          </Link>
-        </div>
-      ))}
+      {/* {categories.map((category) => (
+        <CategoriesPreview
+          title={category.title}
+          items={category.items}
+          key={category.id}
+        />
+      ))} */}
+      <CategoriesPreview />
     </div>
   );
 };
