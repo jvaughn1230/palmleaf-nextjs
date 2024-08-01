@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { categoriesReducer } from "./features/categories/categorySlice";
 import { categoryApi } from "./features/categories/categoryApi";
+import { combineReducers } from "@reduxjs/toolkit";
+import { cartReducer } from "./features/cart/cart.reducer";
 
-const rootReducer = {
+const rootReducer = combineReducers({
   categories: categoriesReducer,
-};
+  cart: cartReducer,
+});
 
 export const makeStore = () => {
   return configureStore({

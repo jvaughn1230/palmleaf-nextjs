@@ -11,6 +11,10 @@ export interface ItemType {
   imageUrl: string;
 }
 
+export interface CartItemType extends ItemType {
+  quantity: number;
+}
+
 export type CategoryMapType = {
   [key: string]: ItemType[];
 };
