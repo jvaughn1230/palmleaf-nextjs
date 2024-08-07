@@ -5,7 +5,7 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "@/lib/features/cart/cart.selector";
-import PaymentForm from "@/components/PaymentForm.Client";
+import PaymentForm from "@/components/PaymentForm.client";
 import { Elements } from "@stripe/react-stripe-js";
 import getStripe from "@/utils/stripe";
 import CheckoutItem from "@/components/CheckoutItem.client";
@@ -25,10 +25,13 @@ const CheckoutPage = () => {
         <div className="checkout-row-section">Price</div>
         <div className="w-[8%]">Delete</div>
       </div>
+
       {cartItems.map((cartItem) => {
         return <CheckoutItem key={cartItem.id} cartItem={cartItem} />;
       })}
+
       <div className="mt-8 ml-auto">Total: ${cartTotal}</div>
+
       <Elements stripe={stripePromise}>
         <PaymentForm />
       </Elements>
