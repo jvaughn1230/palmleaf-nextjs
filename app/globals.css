@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
-
-} */
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -19,10 +15,10 @@
 body {
   -webkit-font-smoothing: antialiased; /* For WebKit browsers */
   -moz-osx-font-smoothing: grayscale; /* For Firefox on macOS */
+  background-color: #c6e2ed;
 }
 
 .checkout-row-section {
   width: 23%;
   text-transform: capitalize;
-  border-left: 4px solid red;
 }

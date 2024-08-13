@@ -4,8 +4,15 @@ export interface CategoryType {
   items: ItemType[];
 }
 
-export interface ItemType {
+export interface CategoryDirectoryItemType {
+  route: string;
   id: number;
+  imageUrl: string;
+  title: string;
+}
+
+export interface ItemType {
+  id: string;
   name: string;
   price: number;
   imageUrl: string;
