@@ -1,10 +1,12 @@
-// Need to create DirectoryComponent to Link to page
+import Directory from "@/components/Directory.client";
+import Hero from "@/components/Hero";
 
 export default function Home() {
   console.log("home page loaded");
   return (
     <main className="min-h-screen">
-      <h1>Home Page</h1>
+      <Hero />
+      <Directory />
     </main>
   );
 }
