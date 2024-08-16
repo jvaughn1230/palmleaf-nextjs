@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { CategoryType } from "@/types/types";
+import { CategoryType, ItemType } from "@/types/types";
 
 import {
   getAuth,
@@ -24,13 +24,12 @@ import {
   query,
   getDocs,
   Firestore,
-  DocumentReference,
-  DocumentData,
+  where,
 } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREASE_AUTH_DOMAIN,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
@@ -47,8 +46,10 @@ googleProvider.setCustomParameters({
 });
 
 export const auth: Auth = getAuth();
+
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
+
 export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
@@ -83,6 +84,28 @@ export const getCategoriesAndDocuments = async (): Promise<CategoryType[]> => {
   );
 
   return categoryArray;
+};
+
+export const getItemsByCategory = async (
+  category: string
+): Promise<ItemType[]> => {
+  const collectionRef = collection(db, "products");
+  const q = query(collectionRef, where("category", "==", category));
+
+  const querySnapshot = await getDocs(q);
+
+  const items = querySnapshot.docs.map((doc) => {
+    const data = doc.data();
+
+    return {
+      id: doc.id,
+      name: data.name,
+      imageUrl: data.imageUrl as string,
+      price: data.price as number,
+    } as ItemType;
+  });
+
+  return items;
 };
 
 export const createUserDocumentFromAuth = async (

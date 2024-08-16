@@ -1,52 +1,29 @@
-"use client";
-import React, { useEffect } from "react";
-import Link from "next/link";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-
+import React from "react";
+import { CategoryType, ItemType } from "@/types/types";
 import { getCategoriesAndDocuments } from "@/utils/firebase";
-import {
-  setCategories,
-  toggleLoading,
-  setError,
-} from "@/lib/features/categories/categorySlice";
-import { SelectCategories } from "@/lib/features/categories/category.selector";
 import CategoriesPreview from "@/components/CategoriesPreview.client";
 
-const ShopPage = () => {
-  const dispatch = useAppDispatch();
-  const categories = useAppSelector(SelectCategories);
+interface ShopPageProps {
+  categories: CategoryType[];
+}
 
-  console.log("shop page loaded");
+const ShopPage = async () => {
+  const categories = await getCategoriesAndDocuments();
 
-  useEffect(() => {
-    const getCategoriesMap = async () => {
-      dispatch(toggleLoading());
-      try {
-        const categoriesArray = await getCategoriesAndDocuments();
-        dispatch(setCategories(categoriesArray));
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-        dispatch(setError("Error fetching categories"));
-      } finally {
-        dispatch(toggleLoading());
-      }
-    };
+  const categoriesArray: CategoryType[] = categories.map((category) => ({
+    id: category.id,
+    title: category.title,
+    items: category.items.slice(0, 5),
+  }));
 
-    getCategoriesMap();
-  }, [dispatch]);
+  console.log(categoriesArray);
 
   return (
     <div>
       <h1>Shop Page</h1>
-      {/* {categories.map((category) => (
-        <CategoriesPreview
-          title={category.title}
-          items={category.items}
-          key={category.id}
-        />
-      ))} */}
-      <CategoriesPreview />
+      <CategoriesPreview categories={categoriesArray} />
     </div>
   );
 };
+
 export default ShopPage;
