@@ -3,10 +3,12 @@ import { categoriesReducer } from "./features/categories/categorySlice";
 import { categoryApi } from "./features/categories/categoryApi";
 import { combineReducers } from "@reduxjs/toolkit";
 import { cartReducer } from "./features/cart/cart.reducer";
+import { userReducer } from "./features/user/userSlice";
 
 const rootReducer = combineReducers({
   categories: categoriesReducer,
   cart: cartReducer,
+  user: userReducer,
 });
 
 export const makeStore = () => {
