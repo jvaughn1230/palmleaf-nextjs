@@ -1,41 +1,31 @@
-"use client";
+import React from "react";
+import { CategoryType, ItemType } from "@/types/types";
+import CategoryPageClient from "@/components/CategoryPage.client";
+import { GET_CATEGORY_ITEMS } from "@/lib/graphql/schema";
+import client from "@/lib/graphql/apolloClient";
 
-import React, { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import { CategoryType } from "@/types/types";
-import { useAppSelector } from "@/lib/hooks";
-import {
-  selectCategoriesIsLoading,
-  selectCategoriesMap,
-} from "@/lib/features/categories/category.selector";
-import ItemCard from "@/components/ItemCard";
+interface CategoryPageProps {
+  category: CategoryType;
+  items: ItemType[];
+}
 
-const CategoryPage = () => {
-  const params = useParams();
-  const category = params.category as string;
-  const categoriesMap = useAppSelector(selectCategoriesMap);
-  const isLoading = useAppSelector(selectCategoriesIsLoading);
-  const [items, setItems] = useState<CategoryType["items"]>([]);
+const CategoryPage = async ({ params }: { params: { category: string } }) => {
+  const { category } = params;
 
-  useEffect(() => {
-    if (categoriesMap[category]) {
-      setItems(categoriesMap[category]);
-    }
-  }, [category, categoriesMap]);
-  console.log(items);
+  const { data, error, loading } = await client.query({
+    query: GET_CATEGORY_ITEMS,
+    variables: { title: category },
+  });
+
+  const { categoryByTitle } = data || {};
+  const items = categoryByTitle?.items || [];
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div>
-      <h1>Page Title</h1>
-      {isLoading ? (
-        <p>Loading</p>
-      ) : (
-        <div className="grid grid-cols-1 gap-y-12 gap-x-3 mb-8 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-5">
-          {items.map((item) => (
-            <ItemCard item={item} key={item.id} />
-          ))}
-        </div>
-      )}
+      <CategoryPageClient title={category} items={items} />
     </div>
   );
 };
