@@ -1,8 +1,9 @@
 import React from "react";
 import { CategoryType, ItemType } from "@/types/types";
 import CategoryPageClient from "@/components/CategoryPage.client";
-import { GET_CATEGORY_ITEMS } from "@/lib/graphql/schema";
+import { GET_CATEGORY_ITEMS } from "@/lib/graphql/queries";
 import client from "@/lib/graphql/apolloClient";
+import CategoriesPreview from "@/components/CategoriesPreview.client";
 
 interface CategoryPageProps {
   category: CategoryType;

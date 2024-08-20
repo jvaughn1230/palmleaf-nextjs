@@ -1,4 +1,3 @@
-// "use client";
 import React from "react";
 import { ItemType } from "@/types/types";
 import ItemCard from "./ItemCard";
@@ -12,8 +11,6 @@ const CategoryPageClient: React.FC<CategoryPageClientProps> = ({
   title,
   items,
 }) => {
-  // const items = categoriesMap[title.toLowerCase()] || [];
-
   return (
     <div>
       <h1>{title}</h1>

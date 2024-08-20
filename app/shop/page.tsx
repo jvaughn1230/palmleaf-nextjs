@@ -1,25 +1,9 @@
 import React from "react";
 import { CategoryType, ItemType } from "@/types/types";
 import CategoriesPreview from "@/components/CategoriesPreview.client";
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import client from "@/lib/graphql/apolloClient";
-
-import { getCategoryByTitle } from "@/utils/firebase";
-
-const GET_CATEGORIES_WITH_LIMITED_ITEMS = gql`
-  query GetCategoriesWithItems($limit: Int) {
-    categories {
-      id
-      title
-      items(limit: $limit) {
-        id
-        name
-        price
-        imageUrl
-      }
-    }
-  }
-`;
+import { GET_CATEGORIES_WITH_PREVIEW_ITEMS } from "@/lib/graphql/queries";
 
 interface ShopPageProps {
   categories: CategoryType[];
@@ -27,7 +11,7 @@ interface ShopPageProps {
 
 const ShopPage = async () => {
   const { data, error } = await client.query({
-    query: GET_CATEGORIES_WITH_LIMITED_ITEMS,
+    query: GET_CATEGORIES_WITH_PREVIEW_ITEMS,
     variables: { limit: 4 },
   });
 
