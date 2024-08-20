@@ -86,26 +86,27 @@ export const getCategoriesAndDocuments = async (): Promise<CategoryType[]> => {
   return categoryArray;
 };
 
-export const getItemsByCategory = async (
-  category: string
-): Promise<ItemType[]> => {
-  const collectionRef = collection(db, "products");
-  const q = query(collectionRef, where("category", "==", category));
+export const getCategoryByTitle = async (title: string) => {
+  const collectionRef = collection(db, "categories");
+
+  console.log(title);
+  const q = query(collectionRef, where("title", "==", title));
 
   const querySnapshot = await getDocs(q);
 
-  const items = querySnapshot.docs.map((doc) => {
-    const data = doc.data();
+  if (querySnapshot.empty) {
+    console.log("No matching documents.");
+    return null;
+  }
 
-    return {
-      id: doc.id,
-      name: data.name,
-      imageUrl: data.imageUrl as string,
-      price: data.price as number,
-    } as ItemType;
-  });
+  const doc = querySnapshot.docs[0];
+  const data = doc.data();
 
-  return items;
+  return {
+    id: doc.id,
+    title: data.title,
+    items: data.items || [],
+  };
 };
 
 export const createUserDocumentFromAuth = async (
