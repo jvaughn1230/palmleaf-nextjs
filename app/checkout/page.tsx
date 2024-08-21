@@ -1,20 +1,15 @@
 "use client";
-import React from "react";
-import { useAppSelector } from "@/lib/hooks";
-import {
-  selectCartItems,
-  selectCartTotal,
-} from "@/lib/features/cart/cart.selector";
+import React, { useContext } from "react";
+
 import PaymentForm from "@/components/PaymentForm.client";
 import { Elements } from "@stripe/react-stripe-js";
 import getStripe from "@/utils/stripe";
 import CheckoutItem from "@/components/CheckoutItem.client";
+import { CartContext } from "@/contexts/cartContext";
 
 const CheckoutPage = () => {
+  const { cartItems, cartTotal } = useContext(CartContext);
   const stripePromise = getStripe();
-
-  const cartItems = useAppSelector(selectCartItems);
-  const cartTotal = useAppSelector(selectCartTotal);
 
   return (
     <div className="w-1/2 min-h-[90vh] flex flex-col items-center mx-auto mt-12 mb-0">
@@ -26,10 +21,13 @@ const CheckoutPage = () => {
         <div className="w-[8%]">Delete</div>
       </div>
 
-      {cartItems.map((cartItem) => {
-        return <CheckoutItem key={cartItem.id} cartItem={cartItem} />;
-      })}
-
+      {cartItems.length === 0 ? (
+        <p>Your cart is empty</p>
+      ) : (
+        cartItems.map((cartItem) => (
+          <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+        ))
+      )}
       <div className="mt-8 ml-auto">Total: ${cartTotal}</div>
 
       <Elements stripe={stripePromise}>

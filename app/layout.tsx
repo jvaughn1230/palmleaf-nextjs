@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 
 import { Providers } from "@/components/Providers";
+import { CartProvider } from "@/contexts/cartContext";
 
 import StoreProvider from "./StoreProvider";
 import Navbar from "@/components/Navbar.client";
@@ -26,10 +27,12 @@ export default function RootLayout({
     <StoreProvider>
       <html lang="en">
         <Providers>
-          <body className={` ${openSans.className} px-10 py-5`}>
-            <Navbar />
-            {children}
-          </body>
+          <CartProvider>
+            <body className={` ${openSans.className} px-10 py-5`}>
+              <Navbar />
+              {children}
+            </body>
+          </CartProvider>
         </Providers>
       </html>
     </StoreProvider>

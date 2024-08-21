@@ -1,7 +1,6 @@
 import React from "react";
 import { CategoryType, ItemType } from "@/types/types";
 import CategoriesPreview from "@/components/CategoriesPreview.client";
-import { gql } from "@apollo/client";
 import client from "@/lib/graphql/apolloClient";
 import { GET_CATEGORIES_WITH_PREVIEW_ITEMS } from "@/lib/graphql/queries";
 
