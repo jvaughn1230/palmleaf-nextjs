@@ -1,20 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import {
-  selectCartCount,
-  selectIsCartOpen,
-} from "@/lib/features/cart/cart.selector";
-import { setIsCartOpen } from "@/lib/features/cart/cart.reducer";
+import { CartContext } from "@/contexts/cartContext";
 
 const CartIcon = () => {
-  const dispatch = useAppDispatch();
-  const cartCount = useAppSelector(selectCartCount);
-  const isCartOpen = useAppSelector(selectIsCartOpen);
+  const { setIsCartOpen, isCartOpen, cartCount } = useContext(CartContext);
 
-  const toggleIsCartOpen = () => dispatch(setIsCartOpen(!isCartOpen));
+  const toggleIsCartOpen = () => {
+    setIsCartOpen(!isCartOpen);
+  };
 
   return (
     <div

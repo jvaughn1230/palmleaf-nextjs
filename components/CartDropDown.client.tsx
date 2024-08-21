@@ -1,27 +1,17 @@
 "use client";
 
-import React, { useCallback } from "react";
-import { useAppSelector, useAppDispatch } from "@/lib/hooks";
+import React, { useCallback, useContext } from "react";
 import CartItem from "./CartItem.client";
 import { useRouter } from "next/navigation";
-
-import {
-  selectCartItems,
-  selectIsCartOpen,
-} from "@/lib/features/cart/cart.selector";
-import { setIsCartOpen } from "@/lib/features/cart/cart.reducer";
+import { CartContext } from "@/contexts/cartContext";
 
 const CartDropDown = () => {
+  const { cartItems, setIsCartOpen } = useContext(CartContext);
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  const cartItems = useAppSelector(selectCartItems);
-  const IsCartOpen = useAppSelector(selectIsCartOpen);
-
-  const toggleIsCartOpen = () => dispatch(setIsCartOpen(!IsCartOpen));
 
   const goToCheckoutHandler = useCallback(() => {
     router.push("/checkout");
-    toggleIsCartOpen();
+    setIsCartOpen(false);
   }, [router]);
 
   return (
@@ -35,7 +25,7 @@ const CartDropDown = () => {
           <div className="text-lg my-12 mx-auto">Your Cart Is Empty</div>
         )}
       </div>
-      <button onClick={() => router.push("/checkout")}>Checkout</button>
+      <button onClick={() => goToCheckoutHandler()}>Checkout</button>
     </div>
   );
 };

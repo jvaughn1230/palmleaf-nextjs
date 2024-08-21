@@ -1,18 +1,18 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import CartIcon from "./CartIcon.client";
-import { selectIsCartOpen } from "@/lib/features/cart/cart.selector";
 import { useAppSelector } from "@/lib/hooks";
 import CartDropDown from "./CartDropDown.client";
 import { selectCurrentUser } from "@/lib/features/user/user.selector";
 import { signOutUser } from "@/utils/firebase";
 import { usePathname } from "next/navigation";
+import { CartContext } from "@/contexts/cartContext";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const isCartOpen = useAppSelector(selectIsCartOpen);
   const currentUser = useAppSelector(selectCurrentUser);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <div className="font-bold h-16 w-full flex justify-between mb-6 z-10 relative text-black">
