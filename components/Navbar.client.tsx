@@ -2,16 +2,15 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import CartIcon from "./CartIcon.client";
-import { useAppSelector } from "@/lib/hooks";
 import CartDropDown from "./CartDropDown.client";
-import { selectCurrentUser } from "@/lib/features/user/user.selector";
 import { signOutUser } from "@/utils/firebase";
 import { usePathname } from "next/navigation";
 import { CartContext } from "@/contexts/cartContext";
+import { UserContext } from "@/contexts/userContext";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const currentUser = useAppSelector(selectCurrentUser);
+  const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
 
   return (

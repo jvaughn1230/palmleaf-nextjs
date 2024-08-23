@@ -1,9 +1,11 @@
 "use client";
-import React, { useState, FormEvent, ChangeEvent } from "react";
+import React, { useState, FormEvent, ChangeEvent, useContext } from "react";
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "@/utils/firebase";
+import { UserContext } from "@/contexts/userContext";
+import { useRouter } from "next/navigation";
 
 const defaultFormFields = {
   email: "",
@@ -14,12 +16,15 @@ const SigninForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const router = useRouter();
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
   const signInWithGoogle = async () => {
     await signInWithGooglePopup();
+    router.back();
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -28,6 +33,7 @@ const SigninForm = () => {
     try {
       await signInAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
+      router.back();
     } catch (error) {
       console.log("user sign in failed", error);
     }

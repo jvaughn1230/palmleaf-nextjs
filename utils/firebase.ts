@@ -68,7 +68,6 @@ export const addCollectionAndDocuments = async (
   });
 
   await batch.commit();
-  console.log("Done");
 };
 
 export const getCategoriesAndDocuments = async (): Promise<CategoryType[]> => {
@@ -89,7 +88,6 @@ export const getCategoriesAndDocuments = async (): Promise<CategoryType[]> => {
 export const getCategoryByTitle = async (title: string) => {
   const collectionRef = collection(db, "categories");
 
-  console.log(title);
   const q = query(collectionRef, where("title", "==", title));
 
   const querySnapshot = await getDocs(q);
@@ -142,6 +140,7 @@ export const createAuthUserWithEmailAndPassword = async (
   password: string
 ) => {
   const auth = getAuth();
+
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 

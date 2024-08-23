@@ -11,7 +11,6 @@ const PaymentForm = () => {
   const elements = useElements();
   const amount = useAppSelector(selectCartTotal);
 
-  //   TODO: Change when auth redux feature is setup
   const currentUser = { displayName: "temp name" };
 
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
@@ -61,8 +60,6 @@ const PaymentForm = () => {
         alert("Payment Successful");
     }
   };
-
-  console.log(<CardElement />);
 
   return (
     <div className="h-[300px] flex flex-col items-center justify-center">
