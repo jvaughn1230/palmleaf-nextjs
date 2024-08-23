@@ -5,7 +5,6 @@ import { CategoryType } from "@/types/types";
 export async function GET() {
   try {
     const categories: CategoryType[] = await getCategoriesAndDocuments();
-    console.log(categories);
     return NextResponse.json(categories);
   } catch (error: any) {
     return NextResponse.json(

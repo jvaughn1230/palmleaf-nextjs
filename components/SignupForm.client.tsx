@@ -1,11 +1,14 @@
 "use client";
-import React, { FormEvent, useState, ChangeEvent } from "react";
+import React, { FormEvent, useState, ChangeEvent, useContext } from "react";
 
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
+  signInAuthUserWithEmailAndPassword,
 } from "@/utils/firebase";
 import { AuthError, UserCredential } from "firebase/auth";
+
+import { useRouter } from "next/navigation";
 
 const defaultFormFields = {
   displayName: "",
@@ -17,6 +20,7 @@ const defaultFormFields = {
 const SignupForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const router = useRouter();
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -42,12 +46,17 @@ const SignupForm = () => {
       );
 
       await createUserDocumentFromAuth(user, { displayName });
+
+      await signInAuthUserWithEmailAndPassword(email, password);
+
+      router.back();
+
       resetFormFields();
     } catch (error) {
       if ((error as AuthError).code === "auth/email-already-in-use") {
         alert("Cannot create user, email already in use");
       } else {
-        console.log("user creation encountered an error", error);
+        console.log("User creation encountered an error", error);
       }
     }
   };

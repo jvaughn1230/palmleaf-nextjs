@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface CategoryType {
   title: string;
   id: string;
@@ -42,3 +44,9 @@ export type setNamePayload = {
     name: String;
   };
 };
+
+export interface UserType {
+  displayName: string;
+  email: string;
+  createdAt: Timestamp;
+}
