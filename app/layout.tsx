@@ -6,7 +6,6 @@ import { Providers } from "@/components/Providers";
 import { CartProvider } from "@/contexts/cartContext";
 import { UserProvider } from "@/contexts/userContext";
 
-import StoreProvider from "./StoreProvider";
 import Navbar from "@/components/Navbar.client";
 
 const openSans = Open_Sans({
@@ -25,19 +24,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <Providers>
-          <UserProvider>
-            <CartProvider>
-              <body className={` ${openSans.className} px-10 py-5`}>
-                <Navbar />
-                {children}
-              </body>
-            </CartProvider>
-          </UserProvider>
-        </Providers>
-      </html>
-    </StoreProvider>
+    <html lang="en">
+      <Providers>
+        <UserProvider>
+          <CartProvider>
+            <body className={` ${openSans.className} px-10 py-5`}>
+              <Navbar />
+              {children}
+            </body>
+          </CartProvider>
+        </UserProvider>
+      </Providers>
+    </html>
   );
 }
