@@ -17,7 +17,7 @@ const DirectoryItem: React.FC<DirectoryItemProps> = ({ category }) => {
   return (
     <div
       onClick={onNavigateHandler}
-      className="min-w-[30%] h-60 flex flex-auto items-center justify-center border-2 border-solid border-black mt-0  mb-4 hover:cursor-pointer"
+      className="min-w-[30%] h-60 flex flex-auto items-center justify-center border-2 border-solid border-black mt-0   hover:cursor-pointer md:min-w-[33%] md:max-w-1/3 md:max-w-[50%]"
     >
       <div
         className="w-full h-full bg-cover bg-center"

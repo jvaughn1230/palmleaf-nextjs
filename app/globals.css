@@ -22,3 +22,7 @@ body {
   width: 23%;
   text-transform: capitalize;
 }
+
+.hero {
+  height: calc(100vh - 6.75rem);
+}
