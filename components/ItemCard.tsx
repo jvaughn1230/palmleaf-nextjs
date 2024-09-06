@@ -2,8 +2,7 @@
 import React, { useContext } from "react";
 import { ItemType } from "@/types/types";
 import Image from "next/image";
-import { useAppDispatch } from "@/lib/hooks";
-import { addItemToCart } from "@/lib/features/cart/cart.reducer";
+
 import { CartContext } from "@/contexts/cartContext";
 
 interface ItemCardProps {
@@ -22,13 +21,15 @@ const ItemCard: React.FC<ItemCardProps> = ({ item }) => {
 
   return (
     <div className="w-full flex flex-col h-[350px] items-center relative group">
-      <Image
-        src={imageUrl}
-        alt={name}
-        width={250}
-        height={250}
-        className="mb-[5px] object-cover h-[95%] w-full"
-      />
+      <div className="w-full h-[95%] relative mb-1">
+        <Image
+          src={imageUrl}
+          alt={name}
+          layout="fill"
+          objectFit="cover"
+          className="group-hover:opacity-85 transition-opacity"
+        />
+      </div>
 
       <div className="w-full h-[5%] flex justify-between text-lg">
         <span className="w-[90%] mb-4">{name}</span>
@@ -36,7 +37,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ item }) => {
       </div>
 
       <button
-        className="bg-white text-black border-solid border-black border-[1px] hover:bg-black hover:text-white hover:border-none w-4/5 opacity-70 absolute top-[255px] hidden group-hover:block hover:opacity-85"
+        className="hidden group-hover:flex group-hover:opacity-85 absolute top-[255px]"
         onClick={() => addItemToCartHandler(item)}
       >
         Add to Cart
