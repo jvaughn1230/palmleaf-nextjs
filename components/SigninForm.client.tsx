@@ -6,6 +6,7 @@ import {
 } from "@/utils/firebase";
 import { UserContext } from "@/contexts/userContext";
 import { useRouter } from "next/navigation";
+import FormInput from "./FormInput.client";
 
 const defaultFormFields = {
   email: "",
@@ -46,12 +47,14 @@ const SigninForm = () => {
   };
 
   return (
-    <div>
-      <h2>Already have an account?</h2>
+    <div className="w-[380px] flex flex-col">
+      <h2 className="font-bold text-[1.5em] my-2.5">
+        Already have an account?
+      </h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Email"
+        <FormInput
+          label="Email"
           type="email"
           required
           onChange={handleChange}
@@ -59,17 +62,21 @@ const SigninForm = () => {
           value={email}
         />
 
-        <input
-          placeholder="Password"
+        <FormInput
+          label="Password"
           type="password"
           required
           onChange={handleChange}
           name="password"
           value={password}
         />
-        <div>
+        <div className="flex">
           <button type="submit">Sign In</button>
-          <button type="button" onClick={signInWithGoogle}>
+          <button
+            type="button"
+            onClick={signInWithGoogle}
+            className="bg-blue-500 hover:bg-blue-500 hover:text-black"
+          >
             Sign In With Google
           </button>
         </div>

@@ -4,9 +4,9 @@ import SigninForm from "@/components/SigninForm.client";
 
 const page = () => {
   return (
-    <div className="flex w-[900px] justify-between my-8 mx-auto">
-      <SignupForm />
+    <div className="custom-auth-break flex flex-wrap justify-between  my-[30px] mx-auto max-w-[900px] ">
       <SigninForm />
+      <SignupForm />
     </div>
   );
 };

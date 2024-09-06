@@ -1,6 +1,8 @@
 "use client";
 import React, { FormEvent, useState, ChangeEvent, useContext } from "react";
 
+import FormInput from "./FormInput.client";
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -68,12 +70,14 @@ const SignupForm = () => {
   };
 
   return (
-    <div>
-      <h2> Don&apos;t have an account? </h2>
+    <div className="w-[380px] flex flex-col">
+      <h2 className="font-bold text-[1.5em] my-2.5">
+        Don&apos;t have an account?
+      </h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Display Name"
+        <FormInput
+          label="Name"
           type="text"
           required
           onChange={handleChange}
@@ -81,8 +85,8 @@ const SignupForm = () => {
           value={displayName}
         />
 
-        <input
-          placeholder="Email"
+        <FormInput
+          label="Email"
           type="email"
           required
           onChange={handleChange}
@@ -90,8 +94,8 @@ const SignupForm = () => {
           value={email}
         />
 
-        <input
-          placeholder="Password"
+        <FormInput
+          label="Password"
           type="password"
           required
           onChange={handleChange}
@@ -99,8 +103,8 @@ const SignupForm = () => {
           value={password}
         />
 
-        <input
-          placeholder="Confirm Password"
+        <FormInput
+          label="Confirm Password"
           type="password"
           required
           onChange={handleChange}

@@ -53,3 +53,10 @@ button:hover {
 .hero {
   height: calc(100vh - 6.75rem);
 }
+
+@media (max-width: 850px) {
+  .custom-auth-break {
+    justify-content: center;
+    row-gap: 32px;
+  }
+}
