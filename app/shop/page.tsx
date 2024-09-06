@@ -34,7 +34,6 @@ const ShopPage = async () => {
 
   return (
     <div>
-      <h1>Shop Page</h1>
       <CategoriesPreview categories={categoriesArray} />
     </div>
   );

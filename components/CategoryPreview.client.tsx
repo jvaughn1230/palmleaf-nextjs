@@ -12,7 +12,7 @@ const CategoryPreview: React.FC<CategoryPreviewProps> = ({ title, items }) => {
   return (
     <div className="flex flex-col mb-8">
       <CategoryLink title={title} />
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
         {items.map((item: ItemType) => (
           <ItemCard key={item.id} item={item} />
         ))}

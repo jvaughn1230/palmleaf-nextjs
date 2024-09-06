@@ -8,7 +8,10 @@ interface CategoryLinkProps {
 
 const CategoryLink: React.FC<CategoryLinkProps> = ({ title }) => {
   return (
-    <Link href={`/shop/${title}`} className="mb-6 cursor-pointer text-3xl">
+    <Link
+      href={`/shop/${title}`}
+      className="mb-6 cursor-pointer text-2xl font-extrabold"
+    >
       {title.toUpperCase()}
     </Link>
   );
