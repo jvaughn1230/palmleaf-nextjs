@@ -1,17 +1,14 @@
 "use client";
-import React, { useState, FormEvent } from "react";
-import { useAppSelector } from "@/lib/hooks";
+import React, { useState, FormEvent, useContext } from "react";
+import { CartContext } from "@/contexts/cartContext";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { selectCartTotal } from "@/lib/features/cart/cart.selector";
-import { getCurrentUser } from "@/utils/firebase";
-import getStripe from "@/utils/stripe";
+import { UserContext } from "@/contexts/userContext";
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const amount = useAppSelector(selectCartTotal);
-
-  const currentUser = { displayName: "temp name" };
+  const { cartTotal, clearCart } = useContext(CartContext);
+  const { currentUser } = useContext(UserContext);
 
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
@@ -29,7 +26,7 @@ const PaymentForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: amount * 100 }),
+      body: JSON.stringify({ amount: cartTotal * 100 }),
     });
 
     const data = await response.json();
@@ -58,17 +55,27 @@ const PaymentForm = () => {
     } else {
       if (paymentResult.paymentIntent.status === "succeeded")
         alert("Payment Successful");
+      clearCart();
+
+      elements.getElement(CardElement)?.clear();
     }
   };
 
   return (
     <div className="h-[300px] flex flex-col items-center justify-center">
-      <form className="h-full min-w-[500px]" onClick={paymentHandler}>
-        <h2>Credit Card Payment</h2>
+      <form
+        className="h-full min-w-[500px] flex flex-col gap-4"
+        onSubmit={paymentHandler}
+      >
+        <h2 className="text-[2rem] font-semibold">Credit Card Payment</h2>
         <CardElement />
 
-        <button className="ml-auto mt-8 min-w-40 w-auto h-12 tracking-[0.5px] leading-[50px] uppercase font-extrabold cursor-pointer flex justify-center items-center whitespace-nowrap bg-white text-black hover:text-white hover:bg-black hover:border-none">
-          Submit Payment
+        <button
+          type="submit"
+          disabled={isProcessingPayment || !cartTotal}
+          className="self-end w-2/5 mt-4 border-2 border-solid border-black bg-white text-black hover:bg-black hover:text-white"
+        >
+          {isProcessingPayment ? "Processing..." : "Pay Now"}
         </button>
       </form>
     </div>

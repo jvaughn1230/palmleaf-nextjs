@@ -15,7 +15,8 @@
 body {
   -webkit-font-smoothing: antialiased; /* For WebKit browsers */
   -moz-osx-font-smoothing: grayscale; /* For Firefox on macOS */
-  background-color: #c6e2ed;
+  /* background-color: #c6e2ed; */
+  background-color: #eaf6f6;
 }
 
 button {
@@ -43,11 +44,6 @@ button:hover {
   background-color: white;
   color: black;
   border: 1px solid black;
-}
-
-.checkout-row-section {
-  width: 23%;
-  text-transform: capitalize;
 }
 
 .hero {

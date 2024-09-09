@@ -12,10 +12,10 @@ const CartDropDown = () => {
   const goToCheckoutHandler = useCallback(() => {
     router.push("/checkout");
     setIsCartOpen(false);
-  }, [router]);
+  }, [router, setIsCartOpen]);
 
   return (
-    <div className="absolute flex flex-col z-20 w-60 h-80 p-5 border-solid border-black border-2 bg-[#EAF6F6] right-10 top-20">
+    <div className="absolute flex flex-col z-20 w-60 h-80 p-5 border-solid border-black border-2 bg-[#EAF6F6] right-0 top-14">
       <div className="h-60 flex flex-col  overflow-y-scroll">
         {cartItems.length ? (
           cartItems.map((cartItem) => (
