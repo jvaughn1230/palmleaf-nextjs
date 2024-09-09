@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 
-// TODO: Need to have form sub & main color
+type FormInputProps = {
+  label: string;
+  value: string;
+  type?: string;
+  name: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+};
 
-const FormInput = ({ label, ...otherProps }) => {
+const FormInput: React.FC<FormInputProps> = ({
+  label,
+  value,
+  ...otherProps
+}) => {
+  const [isFocused, setIsFocused] = useState(false);
+
+  const shrinkLabel = isFocused || value.length > 0;
+
   return (
-    <div className="relative my-11 mx-0">
-      <input className="bg-white text-gray-400 text-lg py-[10px] pr-[10px] pl-[5px] block w-full border-none rounded-none border-b-2 border-b-solid border-b-gray-400 my-6 mx-0 focus:outline-none" />
-      {/* TODO: Label Transition */}
-      <label className="absolute left-1 top-[10px] text-base font-normal">
-        {label}
-      </label>
+    <div className="relative my-11">
+      <input
+        className="bg-white text-gray-600 text-lg p-2.5 pl-1 w-full border-b border-gray-400 rounded-none focus:outline-none focus:border-b-black transition-all"
+        value={value}
+        {...otherProps}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      />
+      {label && (
+        <label
+          className={`absolute left-1 top-2.5 text-gray-500 text-base transition-all duration-300 ${
+            shrinkLabel ? "top-[-16px] text-xs text-black" : ""
+          }`}
+        >
+          {label}
+        </label>
+      )}
     </div>
   );
 };

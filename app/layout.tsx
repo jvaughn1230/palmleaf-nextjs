@@ -28,7 +28,7 @@ export default function RootLayout({
       <Providers>
         <UserProvider>
           <CartProvider>
-            <body className={` ${openSans.className} px-10 py-5`}>
+            <body className={` ${openSans.className} px-10 py-5 `}>
               <Navbar />
               {children}
             </body>

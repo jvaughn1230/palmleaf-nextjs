@@ -10,6 +10,7 @@ type CartContextType = {
   addItemToCart: (productToAdd: CartItemType) => void;
   removeItemFromCart: (cartItemToRemove: CartItemType) => void;
   clearItemFromCart: (cartItemToClear: CartItemType) => void;
+  clearCart: () => void;
   cartCount: number;
   cartTotal: number;
 };
@@ -67,6 +68,7 @@ export const CartContext = createContext<CartContextType>({
   addItemToCart: () => {},
   removeItemFromCart: () => {},
   clearItemFromCart: () => {},
+  clearCart: () => {},
   cartCount: 0,
   cartTotal: 0,
 });
@@ -112,12 +114,17 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCartItems(clearCartItem(cartItems, cartItemToClear));
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   const value: CartContextType = {
     isCartOpen,
     setIsCartOpen,
     addItemToCart,
     removeItemFromCart,
     clearItemFromCart,
+    clearCart,
     cartItems,
     cartCount,
     cartTotal,

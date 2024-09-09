@@ -12,13 +12,13 @@ const CheckoutPage = () => {
   const stripePromise = getStripe();
 
   return (
-    <div className="w-1/2 min-h-[90vh] flex flex-col items-center mx-auto mt-12 mb-0">
-      <div className="w-full py-3 px-4 flex justify-center border-b-2 border-b-solid border-b-gray-500">
-        <div className="checkout-row-section">Product</div>
-        <div className="checkout-row-section">Description</div>
-        <div className="checkout-row-section">Quantity</div>
-        <div className="checkout-row-section">Price</div>
-        <div className="w-[8%]">Delete</div>
+    <div className="w-full md:w-2/3 lg:w-1/2 min-h-[90vh] flex flex-col items-center mx-auto mt-12 mb-0 ">
+      <div className="w-full grid grid-cols-[2fr_3fr_1fr_1fr_1fr] gap-4 py-3 px-4 border-b-2 border-b-solid border-b-gray-500">
+        <div className="text-base sm:text-lg">Product</div>
+        <div className="text-base sm:text-lg">Description</div>
+        <div className="text-base sm:text-lg">Quantity</div>
+        <div className="text-base sm:text-lg">Price</div>
+        <div className="text-base sm:text-lg">Delete</div>
       </div>
 
       {cartItems.length === 0 ? (
@@ -28,7 +28,7 @@ const CheckoutPage = () => {
           <CheckoutItem key={cartItem.id} cartItem={cartItem} />
         ))
       )}
-      <div className="mt-8 ml-auto">Total: ${cartTotal}</div>
+      <div className="mt-8 ml-auto text-[2rem]">Total: ${cartTotal}</div>
 
       <Elements stripe={stripePromise}>
         <PaymentForm />

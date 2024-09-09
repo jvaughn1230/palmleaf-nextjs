@@ -15,7 +15,8 @@
 body {
   -webkit-font-smoothing: antialiased; /* For WebKit browsers */
   -moz-osx-font-smoothing: grayscale; /* For Firefox on macOS */
-  background-color: #c6e2ed;
+  /* background-color: #c6e2ed; */
+  background-color: #eaf6f6;
 }
 
 button {
@@ -45,11 +46,13 @@ button:hover {
   border: 1px solid black;
 }
 
-.checkout-row-section {
-  width: 23%;
-  text-transform: capitalize;
-}
-
 .hero {
   height: calc(100vh - 6.75rem);
+}
+
+@media (max-width: 850px) {
+  .custom-auth-break {
+    justify-content: center;
+    row-gap: 32px;
+  }
 }
