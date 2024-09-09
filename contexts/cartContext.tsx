@@ -2,6 +2,15 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { CartItemType } from "@/types/types";
 
+//check for cart items in local storage
+const getStoredCartItems = (): CartItemType[] => {
+  if (typeof window !== "undefined") {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  }
+  return [];
+};
+
 // Define the CartContextType interface
 type CartContextType = {
   isCartOpen: boolean;
@@ -80,21 +89,23 @@ type CartProviderProps = {
 // Create the CartProvider component
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
-  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
+  const [cartItems, setCartItems] =
+    useState<CartItemType[]>(getStoredCartItems);
   const [cartCount, setCartCount] = useState<number>(0);
   const [cartTotal, setCartTotal] = useState<number>(0);
 
-  // Update cartCount whenever cartItems change
   useEffect(() => {
+    // Persist cart items to localStorage
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+
+    // Calculate cart count
     const newCartCount = cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,
       0
     );
     setCartCount(newCartCount);
-  }, [cartItems]);
 
-  // Update cartTotal whenever cartItems change
-  useEffect(() => {
+    // Calculate cart total
     const newCartTotal = cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity * cartItem.price,
       0
