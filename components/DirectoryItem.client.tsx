@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { CategoryDirectoryItemType } from "@/types/types";
 import { useRouter } from "next/navigation";
@@ -17,10 +18,10 @@ const DirectoryItem: React.FC<DirectoryItemProps> = ({ category }) => {
   return (
     <div
       onClick={onNavigateHandler}
-      className="min-w-[30%] h-60 flex flex-auto items-center justify-center border-2 border-solid border-black mt-0   hover:cursor-pointer md:min-w-[33%] md:max-w-1/3 md:max-w-[50%]"
+      className="min-w-[30%] h-60 flex flex-auto items-center justify-center border-2 border-solid border-black mt-0   hover:cursor-pointer md:min-w-[33%] md:max-w-1/3 md:max-w-[50%] overflow-hidden"
     >
       <div
-        className="w-full h-full bg-cover bg-center"
+        className="w-full h-full bg-cover bg-center transition-transform duration-[6000ms] ease-[cubic-bezier(0.25, 0.45, 0.45, 0.95)] hover:scale-110"
         style={{ backgroundImage: `url(${imageUrl})` }}
       ></div>
       <div className=" h-[90px] py-0 px-[1.5625rem] flex flex-col items-center justify-center border-2 border-solid border-black bg-white opacity-[0.7] absolute">

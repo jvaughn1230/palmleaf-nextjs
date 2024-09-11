@@ -1,12 +1,8 @@
 import React from "react";
-import { CategoryType, ItemType } from "@/types/types";
-import CategoriesPreview from "@/components/CategoriesPreview.client";
+import { CategoryType } from "@/types/types";
+import CategoriesPreview from "@/components/CategoriesPreview.server";
 import client from "@/lib/graphql/apolloClient";
 import { GET_CATEGORIES_WITH_PREVIEW_ITEMS } from "@/lib/graphql/queries";
-
-interface ShopPageProps {
-  categories: CategoryType[];
-}
 
 const ShopPage = async () => {
   const { data, error } = await client.query({

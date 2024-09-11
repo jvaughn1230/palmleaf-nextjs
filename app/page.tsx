@@ -1,5 +1,5 @@
-import Directory from "@/components/Directory.client";
-import Hero from "@/components/Hero";
+import Directory from "@/components/Directory.server";
+import Hero from "@/components/Hero.server";
 
 export default function Home() {
   return (

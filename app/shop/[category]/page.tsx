@@ -1,14 +1,7 @@
 import React from "react";
-import { CategoryType, ItemType } from "@/types/types";
 import CategoryPageClient from "@/components/CategoryPage.client";
 import { GET_CATEGORY_ITEMS } from "@/lib/graphql/queries";
 import client from "@/lib/graphql/apolloClient";
-import CategoriesPreview from "@/components/CategoriesPreview.client";
-
-interface CategoryPageProps {
-  category: CategoryType;
-  items: ItemType[];
-}
 
 const CategoryPage = async ({ params }: { params: { category: string } }) => {
   const { category } = params;
@@ -24,11 +17,7 @@ const CategoryPage = async ({ params }: { params: { category: string } }) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  return (
-    <div>
-      <CategoryPageClient title={category} items={items} />
-    </div>
-  );
+  return <CategoryPageClient title={category} items={items} />;
 };
 
 export default CategoryPage;

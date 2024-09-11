@@ -1,5 +1,5 @@
 import React from "react";
-import ItemCard from "./ItemCard";
+import ItemCard from "./ItemCard.client";
 import { ItemType } from "@/types/types";
 import CategoryLink from "./CategoryLink.client";
 

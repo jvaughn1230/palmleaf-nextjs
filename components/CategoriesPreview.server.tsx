@@ -1,7 +1,7 @@
 import React from "react";
 
-import CategoryPreview from "./CategoryPreview.client";
-import { CategoryType, ItemType } from "@/types/types";
+import CategoryPreview from "./CategoryPreview.server";
+import { CategoryType } from "@/types/types";
 
 interface CategoriesPreviewProps {
   categories: CategoryType[];

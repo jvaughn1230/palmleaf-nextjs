@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 
-import { Providers } from "@/components/Providers";
+import { Providers } from "@/components/Providers.client";
 import { CartProvider } from "@/contexts/cartContext";
 import { UserProvider } from "@/contexts/userContext";
 
