@@ -1,6 +1,6 @@
 import React from "react";
 import { ItemType } from "@/types/types";
-import ItemCard from "./ItemCard";
+import ItemCard from "./ItemCard.client";
 import CategoryLink from "./CategoryLink.client";
 
 interface CategoryPageClientProps {
@@ -13,14 +13,14 @@ const CategoryPageClient: React.FC<CategoryPageClientProps> = ({
   items,
 }) => {
   return (
-    <div>
+    <>
       <CategoryLink title={title} />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-5 gap-y-8">
         {items.map((item) => (
           <ItemCard key={item.id} item={item} />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

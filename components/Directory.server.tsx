@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { categoriesDirectoryData } from "../lib/categoriesDirectoryData";
 import DirectoryItem from "./DirectoryItem.client";

@@ -25,9 +25,8 @@ const ItemCard: React.FC<ItemCardProps> = ({ item }) => {
         <Image
           src={imageUrl}
           alt={name}
-          layout="fill"
-          objectFit="cover"
-          className="group-hover:opacity-85 transition-opacity"
+          fill
+          className="group-hover:opacity-85 transition-opacity object-cover"
         />
       </div>
 
