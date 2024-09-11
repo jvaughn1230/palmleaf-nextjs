@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CartIcon from "./CartIcon.client";
-import palmLogo from "@/public/assets/leaf.svg";
+import palmLogo from "@/app/icon.svg";
 import CartDropDown from "./CartDropDown.client";
 import { signOutUser } from "@/utils/firebase";
 import { usePathname } from "next/navigation";
