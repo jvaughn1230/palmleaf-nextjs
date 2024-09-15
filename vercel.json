@@ -6,9 +6,9 @@
       "use": "@vercel/node"
     },
     {
-      "src": "lib/**/*",
-      "use": "@vercel/node"
+      "src": "next.config.js",
+      "use": "@vercel/next"
     }
   ],
-  "routes": [{ "src": "/api/(.*)", "dest": "/api/$1" }]
+  "routes": [{ "src": "/api/graphql", "dest": "/api/graphql" }]
 }
