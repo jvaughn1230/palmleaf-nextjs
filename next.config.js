@@ -1,4 +1,4 @@
-const nextConfig = {
+export const nextConfig = {
   images: {
     domains: ["i.ibb.co"],
   },
@@ -11,11 +11,8 @@ const nextConfig = {
             key: "Cross-Origin-Opener-Policy",
             value: "same-origin",
           },
-          // other headers
         ],
       },
     ];
   },
 };
-
-module.exports = nextConfig;
